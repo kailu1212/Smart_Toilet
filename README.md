@@ -768,8 +768,10 @@ mpg123 data/sounds/alert1.mp3
 
 ### 系統運作展示
 
-> ![運作展示影片](data/video/IoT_馬桶蓋保衛戰.mp4)  
-> _系統運作展示：偵測蓋子開啟 → 播放音效 → 馬達推動落蓋_
+> [![系統運作展示影片](https://img.youtube.com/vi/huhw_iSwexY/maxresdefault.jpg)](https://youtu.be/huhw_iSwexY)  
+> _📹 點擊觀看完整影片：偵測蓋子開啟 → 播放音效 → 馬達推動落蓋 → LINE 通知_
+
+**YouTube 影片連結**：https://youtu.be/huhw_iSwexY
 
 ---
 
