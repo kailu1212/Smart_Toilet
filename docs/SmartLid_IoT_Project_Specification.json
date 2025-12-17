@@ -1,0 +1,105 @@
+{
+    "task": "Generate an IoT project specification.",
+    "project_overview": {
+        "title": "SmartLid：智慧馬桶蓋提醒系統",
+        "subtitle": "以 Raspberry Pi 與磁簧開關為核心的趣味 IoT 衛生習慣提醒裝置",
+        "description": "偵測馬桶蓋是否放下，若長時間未放下則自動提醒與通知。",
+        "objective": "利用最低硬體成本建立可 DIY、可攜帶的智慧馬桶蓋監控系統。",
+        "target_users": "租屋族、智慧家庭入門者、IoT 初學者。"
+    },
+    "problem_and_motivation": {
+        "problem_statement": "多數租屋處缺乏智慧化衛浴設備，難以養成良好使用習慣。",
+        "motivation": "打造低成本、易安裝、易攜帶的智慧落蓋提醒系統。",
+        "expected_impact": "有效改善衛生習慣，並讓 IoT 技術更貼近日常生活。"
+    },
+    "system_architecture": {
+        "core_concept": "Raspberry Pi 透過磁簧開關偵測蓋子狀態，若未在時間內放下則觸發提醒。",
+        "components": {
+            "controller": "Raspberry Pi 4",
+            "sensors": [
+                "磁簧開關（用此感測器判斷蓋子開或合）(MTARDALL219)"
+            ],
+            "actuators": [
+                "外接音響（提醒音效）",
+                "SG90 伺服馬達（輔助落蓋）"
+            ],
+            "network": "Wi-Fi",
+            "cloud_service": {
+                "local_web": "Flask Dashboard",
+                "protocol": "MQTT",
+                "notification": "LINE Bot"
+            }
+        },
+        "system_flow": "偵測蓋子開啟 → 計時 → 時間到仍未放下 → 階段1：播放提醒音 + 伺服馬達輕推落蓋 → 若當天累計 2 次 → 階段2：播放第二音效 + LINE Bot 通知 → 紀錄事件"
+    },
+    "hardware_specification": [
+        {
+            "component": "Magnetic Reed Switch（磁簧開關）",
+            "description": "主要偵測馬桶蓋是否放下",
+            "purpose": "唯一感測輸入來源"
+        },
+        {
+            "component": "Raspberry Pi 4",
+            "description": "負責 GPIO 讀取、邏輯判斷、音效播放與雲端通訊",
+            "purpose": "中央控制"
+        },
+        {
+            "component": "外接音響",
+            "description": "播放階段1與階段2的音效",
+            "purpose": "本地端通知"
+        },
+        {
+            "component": "SG90 伺服馬達",
+            "description": "在提醒後輕推蓋子下降",
+            "purpose": "輔助落蓋"
+        },
+        {
+            "component": "Wi-Fi（內建）",
+            "description": "LINE Bot 推播、雲端連動",
+            "purpose": "IoT 通訊"
+        }
+    ],
+    "software_specification": {
+        "os": "Raspberry Pi OS (Bookworm)",
+        "language": "Python 3.11",
+        "framework": "Flask + MQTT + gpiozero",
+        "frontend": "Flask Dashboard + Chart.js",
+        "cloud_integration": "LINE Messaging API",
+        "database": "SQLite（紀錄每日提醒/未落蓋事件）"
+    },
+    "communication_and_data_flow": {
+        "protocol": "MQTT + HTTP",
+        "data_direction": "磁簧狀態 → Raspberry Pi → LINE Bot / Web → 使用者",
+        "data_logging": "每日計算未落蓋次數 + 觸發記錄",
+        "visualization_interface": "Flask Dashboard（統計/圖表）"
+    },
+    "logic_and_behavior": {
+        "trigger_condition": "蓋子保持開啟狀態超過指定時間（如 20 秒 / 1 分鐘）",
+        "stage_1_behavior": "播放 alert1.mp3 + 伺服馬達放下蓋子 + 記錄事件",
+        "stage_2_condition": "當日累計兩次未放下蓋子",
+        "stage_2_behavior": "播放 alert2.mp3 + LINE Bot 通知 + 記錄事件",
+        "daily_reset": "午夜 00:00 自動歸零並寫入日誌"
+    },
+    "use_cases": [
+        {
+            "scenario": "現場提醒（階段1）",
+            "description": "蓋子開太久未放下 → 播放提醒音效 → 自動放下蓋子"
+        },
+        {
+            "scenario": "兩次未落蓋（階段2）",
+            "description": "一天內第二次未落蓋 → 播放階段2音效 + LINE Bot 推播"
+        },
+        {
+            "scenario": "數據統計與可視化",
+            "description": "Web Dashboard 顯示每日提醒記錄、行為趨勢"
+        }
+    ],
+    "deliverables": [
+        "系統架構圖（無 PIR 版本）",
+        "硬體接線圖（RPI + 磁簧 + SG90 + 音響）",
+        "Python 原始碼（含計時邏輯、音效播放、LINE Bot）",
+        "Flask Web Dashboard 頁面",
+        "事件紀錄 SQLite",
+        "展示影片與完整報告"
+    ]
+}

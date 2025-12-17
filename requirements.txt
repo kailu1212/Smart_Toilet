@@ -1,0 +1,36 @@
+# SmartLid IoT Project - Python Dependencies
+# 
+# 安裝方式：pip install -r requirements.txt
+# 注意：建議在 Raspberry Pi 上使用系統套件或虛擬環境
+
+# === 核心硬體控制 ===
+# GPIO 控制（Raspberry Pi 專用）
+gpiozero>=2.0
+RPi.GPIO>=0.7.1
+
+# === 音效播放 ===
+pygame>=2.5.0
+
+# === HTTP 請求（LINE API） ===
+requests>=2.31.0
+
+# === 環境變數管理 ===
+python-dotenv>=1.0.0
+
+# === 日誌與除錯（選用） ===
+# loguru>=0.7.0
+
+# === Flask Web Dashboard（未來擴充） ===
+# Flask>=3.0.0
+# flask-cors>=4.0.0
+
+# === MQTT（未來擴充） ===
+# paho-mqtt>=1.6.1
+
+# === 資料庫（未來擴充） ===
+# SQLite 為 Python 內建，無需額外安裝
+
+# === 資料視覺化（未來擴充） ===
+# matplotlib>=3.7.0
+# pandas>=2.0.0
+
